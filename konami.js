@@ -47,7 +47,6 @@ var Konami = (function() {
     var key = event.keyCode;
     //add key to streak
     streak.push(key);
-    console.log('start: ' + streak);
     //check if streak is still correct
     if (okay()) {
       //check if streak is complete
@@ -60,12 +59,9 @@ var Konami = (function() {
       //until streak is correct or gone
       while (!okay() && streak.length !== 0) {
         //shift streak back by one
-        console.log('while1: ' + streak);
         streak.splice(0, 1);
-        console.log('while2: ' + streak);
       }
     }
-    console.log('end: ' + streak);
   }
 
   window.addEventListener('keydown', check);
