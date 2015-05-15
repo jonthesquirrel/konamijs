@@ -2,6 +2,17 @@
 var Konami = (function() {
   'use strict';
 
+  function arraysEqual(a, b) {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length != b.length) return false;
+
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  }
+
   //arbitrary functions to be run when code is entered correctly
   var callbacks = [];
 
@@ -27,12 +38,18 @@ var Konami = (function() {
   //current correct streak of keys user has pressed
   var streak = [];
 
+  //test if streak is shadowing code correctly
+  function okay() {
+    return arraysEqual(streak, code.slice(0, streak.length));
+  }
+
   function check(event) {
     var key = event.keyCode;
-    //add key to streak and get position of key in streak
-    var position = streak.push(key) - 1;
+    //add key to streak
+    streak.push(key);
+    console.log('start: ' + streak);
     //check if streak is still correct
-    if (streak[position] === code[position]) {
+    if (okay()) {
       //check if streak is complete
       if (streak.length === code.length) {
         activate();
@@ -40,11 +57,15 @@ var Konami = (function() {
         streak = [];
       }
     } else {
-      //remove wrong keys from top of streak
-      while ((streak[streak.length - 1] !== code[streak.length - 1]) && streak.length !== 0) {
-        streak.pop();
+      //until streak is correct or gone
+      while (!okay() && streak.length !== 0) {
+        //shift streak back by one
+        console.log('while1: ' + streak);
+        streak.splice(0, 1);
+        console.log('while2: ' + streak);
       }
     }
+    console.log('end: ' + streak);
   }
 
   window.addEventListener('keydown', check);
