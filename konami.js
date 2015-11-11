@@ -73,5 +73,5 @@ var Konami = (function() {
   return Konami;
 })();
 
-//run myFunction each time konami code is entered: Komani(myFunction);
+//run myFunction each time konami code is entered: Konami(myFunction);
 //run myFunction only first time code is entered: Konami(myFunction, true);
