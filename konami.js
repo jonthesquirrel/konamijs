@@ -1,4 +1,4 @@
-// https://github.com/lasercar/konamijs
+// https://github.com/jonthesquirrel/konamijs
 var Konami = (function() {
   'use strict';
 
